@@ -1,0 +1,78 @@
+
+#BarTable {
+    color: white;
+    display: block;
+    overflow-y: scroll;
+    height: 400px;
+
+
+}
+#ScoreTable{
+    color: white;
+    display: block;
+
+}
+#ScoreTable tr:nth-child(odd) {
+    background-color:#003764;
+}
+
+#ScoreTable tr:nth-child(even) {
+
+    background-color:#001542;
+}
+#ScoreTable th:nth-child(1) {
+    width: 330px;
+    background-color:#0072c6;
+}
+#ScoreTable th:nth-child(2) {
+    min-width: 200px;
+     background-color:#0072c6;
+}
+#ScoreTable th:nth-child(3) {
+    min-width: 200px;
+     background-color:#0072c6;
+}
+
+
+#BarTable tr:nth-child(odd) {
+    background-color:#003764;
+}
+
+#BarTable tr:nth-child(even) {
+    width: fit-content;
+    background-color:#001542;
+}
+#BarTable tr:nth-child(1) {
+    background-color:#0072c6;
+}
+#BarTable th:nth-child(1) {
+    width: 330px;
+}
+#BarTable th:nth-child(2) {
+    min-width: 200px;
+}
+#BarTable th:nth-child(3) {
+    min-width: 200px;
+}
+
+#BarTable::-webkit-scrollbar {
+    display: none;
+}
+
+#select {
+    margin-left: 10%;
+    width: 80%;
+}
+
+#select2 {
+    margin-left: 10%;
+    width: 80%;
+}
+
+#BarPlot {
+    margin-left: 20px;
+    overflow-x: auto;
+    border-color: black;
+    border-width: 5px;
+}
+#ScoreTable
