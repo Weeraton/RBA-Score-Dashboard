@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import plotly.express as px
 import base64
-
+pd.options.display.float_format = '${:.2f}'.format
 df = pd.read_csv('Score By AI.csv').drop(columns='Unnamed: 0')
 
 df3 = pd.read_csv('Company Name.csv').drop(columns='Unnamed: 0')
@@ -213,15 +213,15 @@ def Bar(a,b,c):
             xlist2.append(i)
             ylist2.append(df2.loc[c][i])
     if c != 'none':
-        fig = go.Figure(data=[go.Bar(name='Company1', x=xlist, y=ylist, marker_color='indianred'),
-                              go.Bar(name='Company2', x=xlist2, y=ylist2, marker_color='red')])
+        fig = go.Figure(data=[go.Bar(name='Company1', x=xlist, y=ylist, marker_color='Green'),
+                              go.Bar(name='Company2', x=xlist2, y=ylist2, marker_color='Teal')])
     else :
         print(xlist)
         print(ylist)
-        fig = go.Figure(data=[go.Bar(name='Company1', x=xlist, y=ylist, marker_color='indianred')])
+        fig = go.Figure(data=[go.Bar(name='Company1', x=xlist, y=ylist, marker_color='Green')])
     # Customize aspect
     # fig.update_layout(title_text='  ')
-    fig.update_layout(title='Compare 2 Compamy Bar Graph ', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+    fig.update_layout(title='Compare 2 Compamy Bar Graph ', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font  ={'color': '#ffffff'})
     return fig
 
 if __name__ == '__main__':
