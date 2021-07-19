@@ -54,7 +54,7 @@ for i,r in df3.iterrows():
 df['Total'] = df['rank_AUM']+df['ประเภทการขายกอง']+df['risk_spectrum']+df['AI']+df['invest_country_flag']+df['ratioAI']+df['ratioDI']+df['Sector risk']+df['Total Percent']+df['UnderratePercentR']+df['Comlexity return']+df['Derivative']+df['FX_Ex']+df['Asset']+df['Sensitive']+df['Term to maturity']+df['Nature of liabilities']+df['Last Resort ']+df['Funding strategy to support ']+df['ประวัติการทำความผิด']
 fig = px.scatter(df, x="Total", y="Total", color="abb", size= "Total")
 #fig = px.scatter(df, x="x", y="y", color="fruit", custom_data=["customdata"])
-fig.update_layout(title='Risk Graph ', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+fig.update_layout(title='Risk Graph ', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(17,72,117,255)', font  ={'color': '#ffffff'})
 
 #Table 2
 table_header2 = [
@@ -76,6 +76,24 @@ app.layout = html.Div([
         ],
         )],style={'padding':'15px','background-color': '#001542'}),
 
+
+
+
+    dbc.Row(
+        [
+
+        dbc.Col(dcc.Graph(id='Scatter', figure=fig,
+                          config={'displayModeBar':False}
+                          , style={
+                                    'color': 'white'
+                                  }
+                          ), width=8),
+        ], no_gutters=True,
+        style=
+        {'width':'95%', 'height':'400px', 'margin':'15px','padding' : '10px' },justify="center",
+#,'background-color': '#114875'
+    ),
+
     dbc.Row([
         dbc.Col([
             html.H5("First", style={'textAlign': 'center','color': 'white'}),
@@ -93,23 +111,6 @@ app.layout = html.Div([
             )])
     ]),
 
-
-    dbc.Row(
-        [
-        dbc.Col(dbc.Table(table_header + table_body, bordered=True,id = 'ScoreTable'), width=4),
-        dbc.Col(dcc.Graph(id='Scatter', figure=fig,
-                          config={'displayModeBar':False}
-                          , style={
-                                    'color': 'white'
-                                  }
-                          ), width=8),
-        ], no_gutters=True,
-        style=
-        dict(width='95%', height='400px', margin='15px',padding = 'auto'),justify="center",
-
-    ),
-
-
     dbc.Row(
         [
 
@@ -125,15 +126,15 @@ app.layout = html.Div([
                         style={'padding':'15px'}),
                 dbc.Row(
                         dbc.Table(id = 'BarTable' , children  = table_header2 + table_body2, bordered=True),
-                        )], width=4,style={'padding':'15px'}),
-        dbc.Col(dcc.Graph(id='BarPlot', figure={},
-                          config={'displayModeBar': False}), width=8,
-                           #style={'margin-left': '5px'}
-                )
+                        )], width=5,style={'padding':'15px'}),
 
+        dbc.Col(dbc.Table(table_header + table_body, bordered=True, id='ScoreTable'), width=5,style={'padding': '15px','margin-top':'65px'}),
         ], no_gutters=True
-        ,style=dict(width='95%', margin='15px',padding = 'auto'),justify="center"
-    )
+        ,style={'width':'95%', 'margin':'15px','padding' : 'auto','justify-content':'space-evenly'},
+    ),
+    dbc.Row(
+            dbc.Col(dcc.Graph(id='BarPlot', figure={},config={'displayModeBar': False}),)
+           )
 ],style={'background-color': '#002653'})
 
 
@@ -178,10 +179,10 @@ def UpdatefactorGen(a,b,c):
     LicList = ['ประวัติการทำความผิด']
     x = GenList if a == 'G' else AssList if a == 'A' else MarList if a == 'M' else LiqList if a == 'L' else LicList if a == 'C' else GenList + AssList + MarList + LiqList
     if c == 'none':
-        header = [html.Thead(html.Tr([html.Th("Factor"), html.Th("First Score"), ]))]
+        header = [html.Thead(html.Tr([html.Th("Factor"), html.Th("First Score"),html.Th("Second"), ]))]
         Tlist = []
         for i in x:
-            Tlist.append(html.Tr([html.Td(i), html.Td(df2.loc[b][i])]))
+            Tlist.append(html.Tr([html.Td(i), html.Td(df2.loc[b][i]), html.Td(0.00)]))
         # Tlist = html.Tbody([Tlist])
     else :
         header = [html.Thead(html.Tr([html.Th("Factor"), html.Th("First Score"),html.Th("Second"), ]))]
