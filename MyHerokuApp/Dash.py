@@ -81,7 +81,34 @@ app.layout = html.Div([
 
     dbc.Row(
         [
+        dbc.Col([
+                    dbc.Row([
+                        html.H5("1st Company", style={'textAlign': 'center', 'color': 'white'}),
+                        dbc.Select(
+                            id="select",
+                            options=x
+                            , value='C0000000021'
+                        )],style={'padding':'15px'}),
+                    dbc.Row([
+                        html.H5("2nd Company", style={'textAlign': 'center', 'color': 'white'}),
+                        dbc.Select(
+                            id="select2",
+                            options=x + [{"label": "none", "value": "none"}, ]
+                            , value='none'
+                        )],style={'padding':'15px'}),
+                    dbc.Row([
+                        html.H5("Main Risk", style={'textAlign': 'center', 'color': 'white'}),
+                        dbc.Select(id="MainRiskSelector",
+                                options=[{"label": 'General', "value": 'G'},
+                                        {"label": 'Market', "value": 'M'},
+                                        {"label": 'Credit/Asset', "value": 'A'},
+                                        {"label": 'Liq' , "value": 'L'},
+                                        {"label": 'License' , "value": 'C'},
+                                        {"label": 'All' , "value": 'Z'},]
+                                        ,value = 'G')],
+                        style={'padding':'15px'}),
 
+        ], width=4,style={'margin-top':'30px'}),
         dbc.Col(dcc.Graph(id='Scatter', figure=fig,
                           config={'displayModeBar':False}
                           , style={
@@ -93,42 +120,15 @@ app.layout = html.Div([
         {'width':'95%', 'height':'400px', 'margin':'15px','padding' : '10px' },justify="center",
 #,'background-color': '#114875'
     ),
-
-    dbc.Row([
-        dbc.Col([
-            html.H5("First", style={'textAlign': 'center','color': 'white'}),
-            dbc.Select(
-                id="select",
-                options=x
-                , value='C0000000021'
-            )]),
-        dbc.Col([
-            html.H5("Second", style={'textAlign': 'center','color': 'white'}),
-            dbc.Select(
-                id="select2",
-                options=x + [{"label": "none", "value": "none"}, ]
-                , value='none'
-            )])
-    ]),
-
     dbc.Row(
         [
-
-        dbc.Col([dbc.Row(
-                        dbc.Select(id="MainRiskSelector",
-                                options=[{"label": 'General', "value": 'G'},
-                                        {"label": 'Market', "value": 'M'},
-                                        {"label": 'Credit/Asset', "value": 'A'},
-                                        {"label": 'Liq' , "value": 'L'},
-                                        {"label": 'License' , "value": 'C'},
-                                        {"label": 'All' , "value": 'Z'},]
-                                        ,value = 'G'),
-                        style={'padding':'15px'}),
+        dbc.Col(dbc.Table(table_header + table_body, bordered=True, id='ScoreTable'), width=5,style={'padding': '15px'}),
+        dbc.Col([
                 dbc.Row(
                         dbc.Table(id = 'BarTable' , children  = table_header2 + table_body2, bordered=True),
                         )], width=5,style={'padding':'15px'}),
 
-        dbc.Col(dbc.Table(table_header + table_body, bordered=True, id='ScoreTable'), width=5,style={'padding': '15px','margin-top':'65px'}),
+
         ], no_gutters=True
         ,style={'width':'95%', 'margin':'15px','padding' : 'auto','justify-content':'space-evenly'},
     ),
